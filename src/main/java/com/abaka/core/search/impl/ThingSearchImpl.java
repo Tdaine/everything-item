@@ -20,7 +20,7 @@ public class ThingSearchImpl implements ThingSearch {
 
     private final Queue<Thing> thingQueue = new ArrayBlockingQueue<>(1024);
 
-    public ThingSearchImpl(FileIndexDao fileIndexDao, ThingClearInterceptor interceptor) {
+    public ThingSearchImpl(FileIndexDao fileIndexDao) {
         this.fileIndexDao = fileIndexDao;
         this.interceptor = new ThingClearInterceptor(this.fileIndexDao,thingQueue);
         this.backgroundClearThread();
