@@ -2,6 +2,10 @@ package com.abaka.core.model;
 
 import lombok.Data;
 
+
+/**
+ * 检索的参数条件
+ */
 @Data
 public class Condition {
     /**
