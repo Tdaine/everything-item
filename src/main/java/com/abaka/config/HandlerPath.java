@@ -43,13 +43,16 @@ public class HandlerPath {
         //C D E F
         //windows program files
         HandlerPath handlerPath = new HandlerPath();
+        //1.FileSystems.getDefault()获取文件系统  getRootDirectories()获取到根目录 返回是一个迭代
         Iterable<Path> paths = FileSystems.getDefault().getRootDirectories();
         //默认要包含的目录，即构建索引是需要处理的路径
         paths.forEach(path -> {
             handlerPath.addIncludePath(path.toString());
         });
         //默认要排除的目录，即构建索引时不需要处理的路径
+        //获取当前操作系统名称
         String systemName = System.getProperty("os.name");
+        //判断是那个系统
         if (systemName.contains("Windows")){
             //Windows
             handlerPath.addExcludePath("C:\\Windows");
@@ -59,7 +62,9 @@ public class HandlerPath {
         }else {
             //linux
             handlerPath.addExcludePath("/root");
-            handlerPath.addExcludePath("/temp");
+            handlerPath.addExcludePath("/tmp");
+            handlerPath.addExcludePath("/etc");
+
         }
         return handlerPath;
     }

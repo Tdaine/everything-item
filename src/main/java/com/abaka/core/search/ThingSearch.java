@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface ThingSearch {
     /**
-     * 根据condition条件检索数据
+     * 根据condition条件进行数据库的检索
      * @param condition
-     * @return
+     * @return 返回thing集合
      */
     List<Thing> search(Condition condition);
 }

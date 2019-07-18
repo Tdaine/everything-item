@@ -5,6 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * 配置了信息应该使用单例
+ * 不希望被多次new，这样容易使配置信息改变
+ */
 @ToString
 public class EverythingConfig {
 
@@ -61,4 +65,10 @@ public class EverythingConfig {
         }
         return config;
     }
+
+//    public static void main(String[] args) {
+//        EverythingConfig everythingConfig = EverythingConfig.getInstance();
+//        System.out.println(everythingConfig.handlerPath.getIncludePath());
+//        System.out.println(everythingConfig.handlerPath.getExcludePath());
+//    }
 }

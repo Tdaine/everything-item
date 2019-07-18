@@ -24,6 +24,9 @@ public class Condition {
 
     /**
      * 是否按照dept进行升序
+     * 检索结果文件信息的排序规则
+     * 1.默认是true -> asc
+     * 2.false -> desc
      */
     public Boolean orderByDepthAsc;
 }

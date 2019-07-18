@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * 数据库访问的对象
+ *
+ * 业务层访问数据库的CRUD
  */
 public interface FileIndexDao {
     /**

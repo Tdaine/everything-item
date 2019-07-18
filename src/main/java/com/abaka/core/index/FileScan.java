@@ -8,6 +8,8 @@ public interface FileScan {
     /**
      * 将指定path路径下的所有目录和文件以及子目录和文件递归扫描
      * 索引到数据库
+     *
+     * 为了建立索引
      * @param path
      */
     void index(String path);

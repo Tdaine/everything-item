@@ -63,7 +63,7 @@ public class DataSourceFactory {
     public static void databaseInit(boolean buildIndex){
 
         //1.获取数据源
-        DataSource dataSource = DataSourceFactory.getInstance();
+        //DataSource dataSource = DataSourceFactory.getInstance();
 
 
         StringBuilder sb = new StringBuilder();
@@ -119,9 +119,8 @@ public class DataSourceFactory {
         }
     }
 
-    public static void main(String[] args) {
-        DataSource dataSource = DataSourceFactory.getInstance();
-        System.out.println(dataSource);
-    }
+//    public static void main(String[] args) {
+//        DataSourceFactory.databaseInit(false);
+//    }
 
 }

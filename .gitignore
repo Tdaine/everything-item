@@ -9,3 +9,5 @@ out
 gen
 /src/test/
 target/
+/everything_item.mv.db
+/everything_item.trace.db

@@ -1,19 +1,27 @@
 package com.abaka.core.search.impl;
 
+import com.abaka.core.dao.DataSourceFactory;
 import com.abaka.core.dao.FileIndexDao;
 import com.abaka.core.interceptor.impl.ThingClearInterceptor;
 import com.abaka.core.model.Condition;
 import com.abaka.core.model.Thing;
 import com.abaka.core.search.ThingSearch;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+
+/**
+ * 业务层
+ */
 public class ThingSearchImpl implements ThingSearch {
 
+    //被final修饰的变量初始化有三种，直接赋值，构造方法，构造块
+    //获取数据源对象
     private final FileIndexDao fileIndexDao;
 
     private final ThingClearInterceptor interceptor;
