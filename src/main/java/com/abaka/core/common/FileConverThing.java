@@ -6,6 +6,7 @@ import com.abaka.core.model.Thing;
 import java.io.File;
 
 /**
+ * 将给定的文件路径转换为thing对象
  * 文件对象转换Thing对象的辅助类
  *
  * 因为是辅助的工具类所以不需要别人继承和实例化，所以定义成私有的(不可以常见对象)和final(不可以被继承)的
@@ -74,4 +75,10 @@ public final class FileConverThing {
         }
         return depth;
     }
+
+//    public static void main(String[] args) {
+//        File file = new File("D:\\arm");
+//        Thing thing = FileConverThing.convert(file);
+//        System.out.println(thing);
+//    }
 }

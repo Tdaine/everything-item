@@ -31,14 +31,18 @@ public class ThingSearchImpl implements ThingSearch {
     public ThingSearchImpl(FileIndexDao fileIndexDao) {
         this.fileIndexDao = fileIndexDao;
         this.interceptor = new ThingClearInterceptor(this.fileIndexDao,thingQueue);
+        //如果一旦创建了interceptor对象就启动清理线程
         this.backgroundClearThread();
     }
 
+    //
     private void backgroundClearThread() {
-        //进行后台清理工作
+        //进行后台清理工作，让它不影响我们的查询线程
         Thread thread = new Thread(this.interceptor);
         thread.setName("Thread-Clear");
+        //设置为守护线程
         thread.setDaemon(true);
+        //开启清理数据库文件线程，后台在run方法中调用了fileIndexDao的delete操作
         thread.start();
     }
 
@@ -53,9 +57,11 @@ public class ThingSearchImpl implements ThingSearch {
         while (iterator.hasNext()){
             Thing thing = iterator.next();
             File file = new File(thing.getPath());
+            //判断要查询的文件是否存在
             if (!file.exists()){
-                //删除
+                //不存在删除迭代器中的文件
                 iterator.remove();
+                //清除数据库中的文件
                 this.thingQueue.add(thing);
             }
         }

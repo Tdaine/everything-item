@@ -1,12 +1,9 @@
 package com.abaka.core.index.impl;
 
 import com.abaka.config.EverythingConfig;
-import com.abaka.core.dao.DataSourceFactory;
-import com.abaka.core.dao.impl.FileIndexDaoImpl;
 import com.abaka.core.index.FileScan;
 import com.abaka.core.interceptor.FileInterceptor;
-import com.abaka.core.interceptor.impl.FileIndexInterceptor;
-import com.abaka.core.interceptor.impl.FilePrintInterceptor;
+
 
 import java.io.File;
 import java.nio.file.FileSystem;

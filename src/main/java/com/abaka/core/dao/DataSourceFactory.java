@@ -53,13 +53,18 @@ public class DataSourceFactory {
                     String path = System.getProperty("user.dir") + File.separator + "everything_item";
                     instance.setUrl("jdbc:h2:" + path);
                     //数据库创建完成之后，初始化表结构
-                   // databaseInit(false);
+                    databaseInit(false);
                 }
             }
         }
         return instance;
     }
 
+    /**
+     * 使用h2自动创建数据库，不需要手动去创建，所以需要调用程序来初始化表
+     * 提供数据库表的初始化，自动创建表
+     * @param buildIndex
+     */
     public static void databaseInit(boolean buildIndex){
 
         //1.获取数据源
@@ -101,7 +106,7 @@ public class DataSourceFactory {
         //3.1获取数据库的连接
         try (Connection connection = getInstance().getConnection();){
             if (buildIndex){
-                try (PreparedStatement statement = connection.prepareStatement("drop table if exists thing;")){
+                try (PreparedStatement statement = connection.prepareStatement("drop table if exists file_index;")){
                     statement.executeUpdate();
                 }catch (SQLException e) {
                     e.printStackTrace();

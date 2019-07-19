@@ -7,6 +7,10 @@ import com.abaka.core.model.Thing;
 
 import java.io.File;
 
+/**
+ * 拦截文件
+ * 在按照路径进行文件扫描时拦截
+ */
 public class FileIndexInterceptor implements FileInterceptor {
 
     private final FileIndexDao fileIndexDao;

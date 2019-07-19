@@ -6,6 +6,8 @@ import com.abaka.core.model.Thing;
 
 import java.util.Queue;
 
+
+//如果文件已经被删除了，应该清除数据库中的文件
 public class ThingClearInterceptor implements Runnable,ThingInterceptor {
 
     private final FileIndexDao fileIndexDao;
@@ -21,6 +23,9 @@ public class ThingClearInterceptor implements Runnable,ThingInterceptor {
         this.fileIndexDao.delete(thing);
     }
 
+    /**
+     * 执行清理工作
+     */
     @Override
     public void run() {
         while (true){
@@ -31,6 +36,7 @@ public class ThingClearInterceptor implements Runnable,ThingInterceptor {
             }
             Thing thing = this.thingQueue.poll();
             if (thing != null){
+                //调用删除数据库文件操作
                 this.apply(thing);
             }
         }

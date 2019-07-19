@@ -62,8 +62,9 @@ public class FileIndexDaoImpl implements FileIndexDao {
         //thing -> path =>  D:\a\b\hello.java
         //thing -> path =>  D:\a\b
         //                  D:\a\ba
-        //like path%
-        //=  最多删除一个，绝对匹配
+        //删除目录下的所有文件
+        //like path%  这里使用模糊匹配还是存在一些问题，如果想要删除D:\a\b路径下的文件，但是存在D:\a\ba路径，那么就会把第二个路径也删除了
+        //所以这里使用 =  最多删除一个，绝对匹配，删除一个路径完全相等的
 
         Connection connection = null;
         PreparedStatement statement = null;
@@ -123,6 +124,7 @@ public class FileIndexDaoImpl implements FileIndexDao {
             sb.append(" order by depth ").append(condition.getOrderByDepthAsc() ? "asc" : "desc");
             sb.append(" limit ").append(condition.getLimit()).append(" offset 0 ");
 
+//            System.out.println(sb.toString());
             statement = connection.prepareStatement(sb.toString());
             //5.执行命令  executeQuery 执行查询返回结果集
             resultSet = statement.executeQuery();
