@@ -63,6 +63,7 @@ public class DataSourceFactory {
     /**
      * 使用h2自动创建数据库，不需要手动去创建，所以需要调用程序来初始化表
      * 提供数据库表的初始化，自动创建表
+     * h2会把数据库创建好，但是没有办法准备表，所以需要每次进来初始化表，
      * @param buildIndex
      */
     public static void databaseInit(boolean buildIndex){
@@ -106,6 +107,7 @@ public class DataSourceFactory {
         //3.1获取数据库的连接
         try (Connection connection = getInstance().getConnection();){
             if (buildIndex){
+                //在buildIndex时，因为要index所以要删除之前的表再调用脚本创建表，然后就用脚本判断是否存在表，如果存在就直接调用，否则创建表
                 try (PreparedStatement statement = connection.prepareStatement("drop table if exists file_index;")){
                     statement.executeUpdate();
                 }catch (SQLException e) {
@@ -113,6 +115,7 @@ public class DataSourceFactory {
                 }
             }
             //3.2创建命令  Statement对象主要是将SQL语句发送到数据库中
+            //直接调用脚本判断是否存在表，如果存在就直接调用，否则创建表
             try (PreparedStatement statement = connection.prepareStatement(sql);){
                 //执行SQL语句
                 statement.executeUpdate();

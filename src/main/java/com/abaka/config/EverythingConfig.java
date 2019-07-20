@@ -50,7 +50,7 @@ public class EverythingConfig {
      */
     @Getter
     @Setter
-    private Integer interval = 600 * 10;
+    private Integer interval = 6000 * 10;
 
     private EverythingConfig(){
 

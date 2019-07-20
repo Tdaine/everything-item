@@ -96,6 +96,7 @@ public class EverythingCmdApplication {
 
         }
         String enableBuildIndex = p.getProperty("everything.enable_build_index");
+//        只要传的字符串是null就会返回false
         config.setEnableBuildindex(Boolean.parseBoolean(enableBuildIndex));
 
         String orderByDEsc = p.getProperty("everything.order_by_desc");

@@ -12,8 +12,15 @@ import org.apache.commons.io.monitor.FileAlterationObserver;
 import java.io.File;
 import java.util.Set;
 
+/**
+ * 使用了外部框架的类来实现监控 commons-io
+ * FileAlterationListenerAdaptor
+ * FileAlterationMonitor
+ * FileAlterationObserver
+ */
 public class FileMonitorImpl extends FileAlterationListenerAdaptor implements FileMonitor {
 
+    //框架中的文件监控
     private FileAlterationMonitor monitor;
 
     private final FileIndexDao fileIndexDao;
@@ -35,7 +42,7 @@ public class FileMonitorImpl extends FileAlterationListenerAdaptor implements Fi
 
     @Override
     public void monitor(HandlerPath handlerPath) {
-        //监控的目录
+        //监控的目录是handlerPath中包含的目录
         Set<String> includePath = handlerPath.getIncludePath();
         for (String path:includePath){
             FileAlterationObserver observer =
@@ -47,26 +54,29 @@ public class FileMonitorImpl extends FileAlterationListenerAdaptor implements Fi
                         }
                         return true;
                     });
+            //用来出来文件同步问题  this:FileAlterationListenerAdaptor的对象
             observer.addListener(this);
             this.monitor.addObserver(observer);
         }
     }
 
+    ///////各种监听动作处理
     @Override
     public void onDirectoryCreate(File directory){
         System.out.println("onDirectoryCreate : " + directory.getAbsolutePath());
+        //文件对象转换为things
         this.fileIndexDao.insert(FileConverThing.convert(directory));
     }
 
     @Override
     public void onDirectoryDelete(File directory){
-        System.out.println("onDirectoryCreat :" + directory.getAbsolutePath());
+        System.out.println("onDirectoryDelete :" + directory.getAbsolutePath());
         this.fileIndexDao.insert(FileConverThing.convert(directory));
     }
 
     @Override
     public void onFileDelete(File file){
-        System.out.println("onFileDElete : " + file.getAbsolutePath());
+        System.out.println("onFileDelete : " + file.getAbsolutePath());
         this.fileIndexDao.insert(FileConverThing.convert(file));
     }
 
