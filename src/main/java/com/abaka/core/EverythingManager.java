@@ -89,6 +89,7 @@ public class EverythingManager {
         Set<String> includePaths = handlerPath.getIncludePath();
         new Thread(() -> {
             System.out.println("Build Index Started ...");
+            long startIndexTime = System.currentTimeMillis();
             final CountDownLatch countDownLatch = new CountDownLatch(includePaths.size());
             for (String path : includePaths){
                 executorService.submit(() -> {
@@ -103,6 +104,10 @@ public class EverythingManager {
                 e.printStackTrace();
             }
             System.out.println("Build Index Complete...");
+            long endIndexTime = System.currentTimeMillis();
+            System.out.println("建立索引时间：" + (endIndexTime - startIndexTime) + "毫秒");
+            int filenumber = FileIndexInterceptor.getFileNumber();
+            System.out.println("文件数量" + filenumber);
         }).start();
     }
 

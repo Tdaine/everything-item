@@ -13,6 +13,8 @@ import java.io.File;
  */
 public class FileIndexInterceptor implements FileInterceptor {
 
+    private static int fileNumber = 0;
+
     private final FileIndexDao fileIndexDao;
 
     public FileIndexInterceptor(FileIndexDao fileIndexDao) {
@@ -23,6 +25,11 @@ public class FileIndexInterceptor implements FileInterceptor {
     @Override
     public void apply(File file) {
         Thing thing = FileConverThing.convert(file);
+        fileNumber++;
         this.fileIndexDao.insert(thing);
+    }
+
+    public static int getFileNumber() {
+        return fileNumber;
     }
 }

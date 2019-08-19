@@ -2,6 +2,7 @@ package com.abaka.cmd;
 
 import com.abaka.config.EverythingConfig;
 import com.abaka.core.EverythingManager;
+import com.abaka.core.interceptor.impl.FileIndexInterceptor;
 import com.abaka.core.model.Condition;
 
 import java.io.FileInputStream;
@@ -66,11 +67,14 @@ public class EverythingCmdApplication {
                                 condition.setFileType(type.toUpperCase());
                             }
                             //打印出查询的结果
+                            long startSearchTime = System.currentTimeMillis();
                             manager.search(condition).forEach(
                                     thing -> {
                                         System.out.println(thing.getPath());
                                     }
                             );
+                            long endSearchTime = System.currentTimeMillis();
+                            System.out.println("检索时间：" + (endSearchTime - startSearchTime) + "毫秒");
                         }else {
                             manager.help();
                         }
